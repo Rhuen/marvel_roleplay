@@ -52,7 +52,8 @@ Module.register("marvel_roleplay",{
           console.log("Error sending request");
         }
       }
-    }
+    };
+    marvelRequest.send();
   },
   processMarvelRoleplay: function(data) {
     if (!data || !data.data.results[0].name || typeof data.data.results[0].name === "undefined") {
