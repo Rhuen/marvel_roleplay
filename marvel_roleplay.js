@@ -36,11 +36,11 @@ Module.register("marvel_roleplay",{
     console.log("Updating marvel roleplay");
     var characterIds = [1009718, 1009351, 1009610, 1009220, 1009368, 1009664, 1009629];
     var ts = new Date().getTime().toString();
-    var hash = CryptoJS.MD5(ts + privateKey + publicKey).toString();
+    var hash = CryptoJS.MD5(ts + this.config.privateKey + this.config.publicKey).toString();
 
     console.log("Hash: " + hash);
     var self = this;
-    var url = "https://gateway.marvel.com/v1/public/characters/" + characterIds[Math.floor(Math.random()*characterIds.length)] + "?ts=" + ts + "&apikey=" + publicKey + "&hash=" + hash;
+    var url = "https://gateway.marvel.com/v1/public/characters/" + characterIds[Math.floor(Math.random()*characterIds.length)] + "?ts=" + ts + "&apikey=" + this.config.publicKey + "&hash=" + hash;
     console.log("URL: " + url);
     var marvelRequest = new XMLHttpRequest();
     marvelRequest.open("GET", url, true);
@@ -67,14 +67,3 @@ Module.register("marvel_roleplay",{
     this.updateDom();
   }
 });
-
-//for config file
-{
-  module: "marvel_roleplay",
-  header: "Marvel Roleplay",
-  position: "bottom_right",
-  config: {
-    publicKey: "92c448d02388c1746b16df4084fb467f",
-    privateKey: "077d3d796b922685c6cb4146a0fea9229dd3f0ba"
-  }
-}
