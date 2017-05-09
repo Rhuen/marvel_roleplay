@@ -39,7 +39,7 @@ Module.register("marvel_roleplay",{
     var hash = CryptoJS.MD5(ts + privateKey + publicKey).toString();
 
     console.log("Hash: " + hash);
-    car self = this;
+    var self = this;
     var url = "https://gateway.marvel.com/v1/public/characters/" + characterIds[Math.floor(Math.random()*characterIds.length)] + "?ts=" + ts + "&apikey=" + publicKey + "&hash=" + hash;
     console.log("URL: " + url);
     var marvelRequest = new XMLHttpRequest();
