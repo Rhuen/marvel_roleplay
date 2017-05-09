@@ -6,7 +6,11 @@ Module.register("marvel_roleplay",{
     console.log("Starting new marvel_roleplay");
     this.hero = "";
     this.description = "";
-    this.updateMarvelRoleplay();
+    var self = this;
+    setTimeout(function() {
+      console.log("inside marvel timeout");
+      this.updateMarvelRoleplay();
+    }, 5000);
   },
   getDom: function() {
     console.log("inside of custom marvel getDom");
@@ -56,14 +60,20 @@ Module.register("marvel_roleplay",{
     marvelRequest.send();
   },
   processMarvelRoleplay: function(data) {
+    console.log("inside process roleplay");
     if (!data || !data.data.results[0].name || typeof data.data.results[0].name === "undefined") {
       //data is unusable, leave function
       console.log("no usable data");
       return;
     }
+    var self = this;
+    self.hero = data.data.results[0].name;
+    self.description = data.data.results[0].description;
 
-    this.hero = data.data.results[0].name;
-    this.description = data.data.results[0].description;
-    this.updateDom();
+    console.log("hero from json: " + data.data.results[0].name);
+    console.log("descr from json: " + data.data.results[0].description);
+    console.log("hero from self: " + self.hero);
+    console.log("descr from self" + self.description);
+    self.updateDom();
   }
 });
